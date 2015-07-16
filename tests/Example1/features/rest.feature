@@ -1,3 +1,4 @@
+@1
 Feature: Create User on test site
 
 Scenario: Create new user that doesn't exist
