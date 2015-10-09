@@ -58,3 +58,40 @@ end
 Then(/^an error message is shown$/) do
   expect(page).to have_content('Error! Invalid details entered')
 end
+
+When(/^I login with an incorrect password$/) do
+fill_in('username', :with => $data['user_name'])
+  fill_in('password', :with => $data['user_name'])
+  click_button('Sign in')
+end
+
+When(/^I click log out$/) do
+click_link('Logout')
+end
+
+Then(/^I am taken to the log in page$/) do
+  expect(page).to have_content('Please sign in')
+end
+
+When(/^fill in the form with no interests selected$/) do
+#This selects the form and fills in the blank fields
+  click_link('Details form')
+  fill_in('forename', :with => 'Mark')
+  fill_in('surname', :with => 'Lunn')
+  fill_in('house_number', :with => '34')
+  fill_in('street', :with => 'Mental Street')
+  fill_in('city', :with => 'Crazy Town')
+  fill_in('postcode', :with => 'PL5 7DE')
+  #choose('male')
+
+#This selects from the drop down box  
+  select('Audi', :from => 'cars')
+end
+
+When(/^I click back to menu$/) do
+click_link('Logout')
+end
+
+Then(/^I return to the menu page$/) do
+expect(page).to have_content('Logged in')
+end
